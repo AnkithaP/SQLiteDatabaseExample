@@ -2,6 +2,7 @@ package com.aryaan.ankitha.sqlitedatabaseexample;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -24,6 +25,24 @@ public class DbHelperAdapter  {
         contentValues.put(DbHelper.PASSWORD,password);
         long id = db.insert(DbHelper.TABLE_NAME,null,contentValues);
         return id;
+    }
+
+    public String getAllData(){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] columns = {DbHelper.UID,DbHelper.NAME,DbHelper.PASSWORD};
+        Cursor cursor = db.query(DbHelper.TABLE_NAME,columns,null,null,null,null,null);
+        StringBuffer buffer = new StringBuffer();
+        while (cursor.moveToNext()){
+            int index = cursor.getColumnIndex(DbHelper.UID);
+            int index1 = cursor.getColumnIndex(DbHelper.NAME);
+            int index2 = cursor.getColumnIndex(DbHelper.PASSWORD);
+
+            int cid = cursor.getInt(index);
+            String name = cursor.getString(index1);
+            String pass = cursor.getString(index2);
+            buffer.append(cid+" "+name+" "+pass+"\n");
+        }
+        return buffer.toString();
     }
 
     class DbHelper extends SQLiteOpenHelper{
