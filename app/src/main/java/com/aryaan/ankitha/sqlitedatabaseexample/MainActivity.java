@@ -59,5 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void delete(View view){
 
+        int count = dbHelperAdapter.deleteRow();
+        Message.message(this,""+count);
     }
 }

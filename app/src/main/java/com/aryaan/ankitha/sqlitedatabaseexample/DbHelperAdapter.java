@@ -70,6 +70,14 @@ public class DbHelperAdapter  {
         return count;
     }
 
+    public int deleteRow(){
+        //DELETE * FROM USERTABLE WHERE Name = 'aryaan'
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] whereArgs = {"Aryaan"};
+        int count = db.delete(DbHelper.TABLE_NAME,DbHelper.NAME+" = ?",whereArgs);
+        return count;
+    }
+
 
     class DbHelper extends SQLiteOpenHelper{
 
