@@ -45,24 +45,19 @@ public class DbHelperAdapter  {
         return buffer.toString();
     }
 
-    public String getData(String name){
-        //SELECT name,password FROM USERTABLE WHERE name = 'aryaan'
+    public String getData(String name, String password){
+        //SELECT uid FROM USERTABLE WHERE name = ? and password = ?
         SQLiteDatabase db = helper.getWritableDatabase();
-        String[] columns = {DbHelper.NAME,DbHelper.PASSWORD};
-        Cursor cursor = db.query(DbHelper.TABLE_NAME,columns,DbHelper.NAME+" ='"+name+"'",null,null,null,null);
+        String[] columns = {DbHelper.UID};
+        String[] selectionArgs = {name,password};
+        Cursor cursor = db.query(DbHelper.TABLE_NAME,columns,DbHelper.NAME+" = ? AND "+ DbHelper.PASSWORD+" = ?",selectionArgs,null,null,null);
         StringBuffer buffer = new StringBuffer();
         while (cursor.moveToNext()){
-
-            int index1 = cursor.getColumnIndex(DbHelper.NAME);
-            int index2 = cursor.getColumnIndex(DbHelper.PASSWORD);
-
-
-            String personeName = cursor.getString(index1);
-            String pass = cursor.getString(index2);
-            buffer.append(name+" "+pass+"\n");
+            int index0 = cursor.getColumnIndex(DbHelper.UID);
+            int personId = cursor.getInt(index0);
+            buffer.append(personId+"\n ");
         }
         return buffer.toString();
-
     }
 
 

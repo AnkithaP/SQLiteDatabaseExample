@@ -44,8 +44,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void viewData(View view){
+
         String s1 = name.getText().toString();
-        String s2 = dbHelperAdapter.getData(s1);
+        // Ankitha qwerty
+        String sub1 = s1.substring(0,s1.indexOf(" "));
+        String sub2 = s1.substring(s1.indexOf(" ")+1);
+        String s2 = dbHelperAdapter.getData(sub1,sub2);
         Message.message(this,s2);
     }
 }
