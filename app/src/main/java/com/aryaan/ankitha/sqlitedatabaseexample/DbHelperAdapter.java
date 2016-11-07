@@ -60,6 +60,16 @@ public class DbHelperAdapter  {
         return buffer.toString();
     }
 
+    public int updateName(String oldName,String newName){
+        //UPDATE USERTABLE SET Name = 'ankitha' WHERE Name = 'aryaan'
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DbHelper.NAME,newName);
+        String[] whereArgs = {oldName};
+        int count = db.update(DbHelper.TABLE_NAME,values,DbHelper.NAME+" = ?",whereArgs);
+        return count;
+    }
+
 
     class DbHelper extends SQLiteOpenHelper{
 

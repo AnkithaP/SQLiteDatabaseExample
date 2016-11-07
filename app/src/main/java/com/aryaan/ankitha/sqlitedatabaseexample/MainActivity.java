@@ -52,4 +52,12 @@ public class MainActivity extends AppCompatActivity {
         String s2 = dbHelperAdapter.getData(sub1,sub2);
         Message.message(this,s2);
     }
+
+    public void update(View view){
+        dbHelperAdapter.updateName("Ankitha","Aryaan");
+    }
+
+    public void delete(View view){
+
+    }
 }
