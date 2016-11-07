@@ -9,7 +9,7 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
 
     DbHelperAdapter dbHelperAdapter;
-    EditText userName, Password;
+    EditText userName, Password,name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         userName = (EditText) findViewById(R.id.editText);
         Password = (EditText)findViewById(R.id.editText2);
+        name = (EditText)findViewById(R.id.editText3);
 
         dbHelperAdapter = new DbHelperAdapter(this);
     }
@@ -40,5 +41,11 @@ public class MainActivity extends AppCompatActivity {
     public void viewDetails(View view){
         String data = dbHelperAdapter.getAllData();
         Message.message(this,data);
+    }
+
+    public void viewData(View view){
+        String s1 = name.getText().toString();
+        String s2 = dbHelperAdapter.getData(s1);
+        Message.message(this,s2);
     }
 }
